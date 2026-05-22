@@ -1,0 +1,51 @@
+# render.yaml — Render deployment configuration
+# This file tells Render exactly how to build and run the backend.
+# Commit this to your repo root (or the /backend folder).
+
+services:
+  - type: web
+    name: banking-rag-chatbot-api
+    runtime: python
+    region: oregon       # closest free-tier region
+    plan: free
+
+    rootDir: backend     # adjust if render.yaml is at the repo root
+
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
+
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false          # set manually in the Render dashboard
+
+      - key: CHROMA_MODE
+        value: local
+
+      - key: CHROMA_PERSIST_DIR
+        value: /var/data/chroma_db   # Render persistent disk mount path
+
+      - key: EMBEDDING_MODEL
+        value: sentence-transformers/all-MiniLM-L6-v2
+
+      - key: CHUNK_SIZE
+        value: "500"
+
+      - key: CHUNK_OVERLAP
+        value: "100"
+
+      - key: TOP_K_RESULTS
+        value: "5"
+
+      - key: LOG_LEVEL
+        value: INFO
+
+      - key: ALLOWED_ORIGINS
+        value: https://your-vercel-app.vercel.app   # update after Vercel deploy
+
+    disk:
+      name: chroma-data
+      mountPath: /var/data
+      sizeGB: 1            # free tier limit
