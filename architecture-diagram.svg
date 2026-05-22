@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Segoe UI, Arial, sans-serif">
+
+  <!-- Background -->
+  <rect width="900" height="620" fill="#0f172a" rx="12"/>
+
+  <!-- Title -->
+  <text x="450" y="38" text-anchor="middle" font-size="18" font-weight="700" fill="#f1f5f9" letter-spacing="0.5">GenAI Banking RAG Chatbot — Architecture</text>
+  <text x="450" y="58" text-anchor="middle" font-size="11" fill="#94a3b8">Retrieval-Augmented Generation · FastAPI · ChromaDB · Gemini/Groq</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- USER box -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <rect x="370" y="78" width="160" height="48" rx="8" fill="#1e40af" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="450" y="97" text-anchor="middle" font-size="12" font-weight="600" fill="#eff6ff">👤 User</text>
+  <text x="450" y="114" text-anchor="middle" font-size="10" fill="#bfdbfe">Browser</text>
+
+  <!-- Arrow: User → Frontend -->
+  <line x1="450" y1="126" x2="450" y2="148" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="463" y="142" font-size="9" fill="#94a3b8">HTTP</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- FRONTEND box -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <rect x="245" y="148" width="410" height="80" rx="8" fill="#0c4a6e" stroke="#0ea5e9" stroke-width="1.5"/>
+  <text x="450" y="170" text-anchor="middle" font-size="13" font-weight="700" fill="#e0f2fe">Next.js 15 Frontend</text>
+  <text x="450" y="186" text-anchor="middle" font-size="10" fill="#7dd3fc">React 18 · TypeScript · Tailwind CSS</text>
+  <text x="450" y="202" text-anchor="middle" font-size="10" fill="#7dd3fc">Chat UI · File Upload · Session History (client-side)</text>
+  <!-- Vercel badge -->
+  <rect x="592" y="152" width="58" height="18" rx="4" fill="#000000" opacity="0.5"/>
+  <text x="621" y="164" text-anchor="middle" font-size="9" fill="#a3e635">▲ Vercel</text>
+
+  <!-- Arrow: Frontend → Backend -->
+  <line x1="450" y1="228" x2="450" y2="254" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="463" y="246" font-size="9" fill="#94a3b8">HTTPS REST</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- BACKEND outer box -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <rect x="50" y="254" width="800" height="256" rx="10" fill="#1e1b4b" stroke="#818cf8" stroke-width="1.5"/>
+  <text x="450" y="276" text-anchor="middle" font-size="13" font-weight="700" fill="#e0e7ff">FastAPI Backend  (Python 3.11+)</text>
+  <!-- API routes pills -->
+  <rect x="272" y="282" width="90" height="18" rx="9" fill="#312e81"/>
+  <text x="317" y="294" text-anchor="middle" font-size="9" fill="#a5b4fc">POST /chat</text>
+  <rect x="372" y="282" width="90" height="18" rx="9" fill="#312e81"/>
+  <text x="417" y="294" text-anchor="middle" font-size="9" fill="#a5b4fc">POST /upload</text>
+  <rect x="472" y="282" width="90" height="18" rx="9" fill="#312e81"/>
+  <text x="517" y="294" text-anchor="middle" font-size="9" fill="#a5b4fc">GET /health</text>
+  <!-- Render badge -->
+  <rect x="762" y="258" width="80" height="18" rx="4" fill="#000000" opacity="0.5"/>
+  <text x="802" y="270" text-anchor="middle" font-size="9" fill="#6ee7b7">● Render</text>
+
+  <!-- ─── RAG Pipeline box ─── -->
+  <rect x="70" y="308" width="340" height="188" rx="8" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+  <text x="240" y="328" text-anchor="middle" font-size="12" font-weight="600" fill="#cbd5e1">RAG Pipeline</text>
+
+  <!-- Step 1: Embed -->
+  <rect x="82" y="336" width="316" height="32" rx="5" fill="#1e293b"/>
+  <text x="90" y="350" font-size="10" font-weight="600" fill="#f59e0b">1</text>
+  <text x="104" y="350" font-size="10" fill="#e2e8f0">Embed query with sentence-transformers</text>
+  <text x="104" y="362" font-size="9" fill="#64748b">all-MiniLM-L6-v2 · 384-dim · cosine</text>
+
+  <!-- Step 2: Retrieve -->
+  <rect x="82" y="374" width="316" height="32" rx="5" fill="#1e293b"/>
+  <text x="90" y="388" font-size="10" font-weight="600" fill="#f59e0b">2</text>
+  <text x="104" y="388" font-size="10" fill="#e2e8f0">Retrieve top-5 similar chunks</text>
+  <text x="104" y="400" font-size="9" fill="#64748b">ChromaDB cosine similarity search</text>
+
+  <!-- Step 3: Build prompt -->
+  <rect x="82" y="412" width="316" height="32" rx="5" fill="#1e293b"/>
+  <text x="90" y="426" font-size="10" font-weight="600" fill="#f59e0b">3</text>
+  <text x="104" y="426" font-size="10" fill="#e2e8f0">Build grounded prompt</text>
+  <text x="104" y="438" font-size="9" fill="#64748b">CONTEXT + HISTORY + QUESTION</text>
+
+  <!-- Step 4: Generate -->
+  <rect x="82" y="450" width="316" height="32" rx="5" fill="#1e293b"/>
+  <text x="90" y="464" font-size="10" font-weight="600" fill="#f59e0b">4</text>
+  <text x="104" y="464" font-size="10" fill="#e2e8f0">Generate grounded answer + citations</text>
+  <text x="104" y="476" font-size="9" fill="#64748b">Strict system prompt · no hallucination</text>
+
+  <!-- ─── Embeddings + VectorDB box ─── -->
+  <rect x="428" y="308" width="200" height="188" rx="8" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+  <text x="528" y="328" text-anchor="middle" font-size="12" font-weight="600" fill="#cbd5e1">Embeddings &amp; VectorDB</text>
+
+  <!-- sentence-transformers -->
+  <rect x="440" y="336" width="176" height="60" rx="5" fill="#1e293b"/>
+  <text x="528" y="354" text-anchor="middle" font-size="10" font-weight="600" fill="#34d399">sentence-transformers</text>
+  <text x="528" y="368" text-anchor="middle" font-size="9" fill="#6ee7b7">all-MiniLM-L6-v2</text>
+  <text x="528" y="381" text-anchor="middle" font-size="9" fill="#64748b">384-dim · normalize_embeddings=True</text>
+
+  <!-- ChromaDB -->
+  <rect x="440" y="404" width="176" height="80" rx="5" fill="#1e293b"/>
+  <text x="528" y="422" text-anchor="middle" font-size="10" font-weight="600" fill="#fb923c">ChromaDB</text>
+  <text x="528" y="436" text-anchor="middle" font-size="9" fill="#fdba74">Persistent on-disk · cosine space</text>
+  <text x="528" y="450" text-anchor="middle" font-size="9" fill="#64748b">chunk_size=500 · overlap=100</text>
+  <text x="528" y="464" text-anchor="middle" font-size="9" fill="#64748b">upsert · query · delete</text>
+  <text x="528" y="478" text-anchor="middle" font-size="9" fill="#64748b">./data/chroma_db (local)</text>
+
+  <!-- ─── LLM Providers box ─── -->
+  <rect x="646" y="308" width="190" height="188" rx="8" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+  <text x="741" y="328" text-anchor="middle" font-size="12" font-weight="600" fill="#cbd5e1">LLM Providers</text>
+
+  <!-- Gemini -->
+  <rect x="658" y="336" width="166" height="84" rx="5" fill="#1e293b"/>
+  <text x="741" y="354" text-anchor="middle" font-size="10" font-weight="600" fill="#60a5fa">Google Gemini</text>
+  <text x="741" y="368" text-anchor="middle" font-size="9" fill="#93c5fd">PRIMARY</text>
+  <text x="741" y="382" text-anchor="middle" font-size="9" fill="#64748b">gemini-2.0-flash</text>
+  <text x="741" y="394" text-anchor="middle" font-size="9" fill="#64748b">gemini-2.0-flash-lite</text>
+  <text x="741" y="406" text-anchor="middle" font-size="9" fill="#64748b">gemini-1.5-flash (fallback chain)</text>
+
+  <!-- Fallback arrow -->
+  <text x="741" y="432" text-anchor="middle" font-size="9" fill="#f87171">↓ quota exceeded?</text>
+
+  <!-- Groq -->
+  <rect x="658" y="438" width="166" height="50" rx="5" fill="#1e293b"/>
+  <text x="741" y="456" text-anchor="middle" font-size="10" font-weight="600" fill="#a78bfa">Groq</text>
+  <text x="741" y="470" text-anchor="middle" font-size="9" fill="#c4b5fd">FALLBACK · Free tier</text>
+  <text x="741" y="482" text-anchor="middle" font-size="9" fill="#64748b">llama-3.3-70b-versatile</text>
+
+  <!-- ─── Internal arrows in backend ─── -->
+  <!-- RAG → Embeddings -->
+  <line x1="410" y1="402" x2="428" y2="402" stroke="#475569" stroke-width="1.2" marker-end="url(#arrow2)"/>
+  <!-- RAG → LLM -->
+  <path d="M 398 480 Q 540 510 646 470" fill="none" stroke="#475569" stroke-width="1.2" marker-end="url(#arrow2)" stroke-dasharray="4,3"/>
+  <text x="530" y="508" text-anchor="middle" font-size="9" fill="#64748b">generate(prompt)</text>
+  <!-- Embeddings → ChromaDB -->
+  <line x1="528" y1="396" x2="528" y2="404" stroke="#475569" stroke-width="1.2" marker-end="url(#arrow2)"/>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- INGEST flow (Upload path) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <rect x="50" y="522" width="800" height="82" rx="10" fill="#14532d" stroke="#22c55e" stroke-width="1.2" opacity="0.85"/>
+  <text x="450" y="542" text-anchor="middle" font-size="12" font-weight="600" fill="#dcfce7">Document Ingestion Flow (POST /upload)</text>
+
+  <!-- Steps row -->
+  <rect x="66" y="552" width="130" height="36" rx="5" fill="#052e16"/>
+  <text x="131" y="567" text-anchor="middle" font-size="10" font-weight="600" fill="#86efac">📄 Upload</text>
+  <text x="131" y="580" text-anchor="middle" font-size="9" fill="#4ade80">PDF · TXT (≤20MB)</text>
+
+  <text x="210" y="572" text-anchor="middle" font-size="14" fill="#22c55e">→</text>
+
+  <rect x="220" y="552" width="110" height="36" rx="5" fill="#052e16"/>
+  <text x="275" y="567" text-anchor="middle" font-size="10" font-weight="600" fill="#86efac">✂️ Chunk</text>
+  <text x="275" y="580" text-anchor="middle" font-size="9" fill="#4ade80">500 tok · 100 overlap</text>
+
+  <text x="342" y="572" text-anchor="middle" font-size="14" fill="#22c55e">→</text>
+
+  <rect x="352" y="552" width="110" height="36" rx="5" fill="#052e16"/>
+  <text x="407" y="567" text-anchor="middle" font-size="10" font-weight="600" fill="#86efac">🔢 Embed</text>
+  <text x="407" y="580" text-anchor="middle" font-size="9" fill="#4ade80">all-MiniLM-L6-v2</text>
+
+  <text x="474" y="572" text-anchor="middle" font-size="14" fill="#22c55e">→</text>
+
+  <rect x="484" y="552" width="110" height="36" rx="5" fill="#052e16"/>
+  <text x="539" y="567" text-anchor="middle" font-size="10" font-weight="600" fill="#86efac">💾 Store</text>
+  <text x="539" y="580" text-anchor="middle" font-size="9" fill="#4ade80">ChromaDB upsert</text>
+
+  <text x="606" y="572" text-anchor="middle" font-size="14" fill="#22c55e">→</text>
+
+  <rect x="616" y="552" width="220" height="36" rx="5" fill="#052e16"/>
+  <text x="726" y="567" text-anchor="middle" font-size="10" font-weight="600" fill="#86efac">✅ Ready to Query</text>
+  <text x="726" y="580" text-anchor="middle" font-size="9" fill="#4ade80">{chunk_count} chunks indexed</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- Arrow markers -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#64748b"/>
+    </marker>
+    <marker id="arrow2" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L7,2.5 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+</svg>
