@@ -1,0 +1,39 @@
+{
+  "name": "banking-rag-chatbot-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GenAI Banking Support Chatbot — Next.js 15 frontend",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.2.12",
+    "lucide-react": "^1.16.0",
+    "next": "^16.2.6",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-dropzone": "^14.2.3",
+    "react-markdown": "^9.0.1",
+    "react-syntax-highlighter": "^15.5.0",
+    "tailwind-merge": "^2.3.0",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/react-syntax-highlighter": "^15.5.13",
+    "@types/uuid": "^10.0.0",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^10.4.0",
+    "eslint-config-next": "^16.2.6",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.4",
+    "typescript": "^5.4.5"
+  }
+}
